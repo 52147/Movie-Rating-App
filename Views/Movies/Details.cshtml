@@ -1,0 +1,40 @@
+@model MovieRatingApp.Models.Movie
+
+<h1>@Model.Title</h1>
+<p><strong>Genre:</strong> @Model.Genre</p>
+<p><strong>Director:</strong> @Model.Director</p>
+<p><strong>Release Date:</strong> @Model.ReleaseDate.ToShortDateString()</p>
+
+<h3>Ratings</h3>
+@if (Model.Ratings.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Rating Value</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rating in Model.Ratings)
+            {
+                <tr>
+                    <td>@rating.User</td>
+                    <td>@rating.RatingValue</td>
+                    <td>
+                        <form asp-controller="Movies" asp-action="DeleteRating" method="post">
+                            <input type="hidden" name="movieId" value="@Model.MovieID" />
+                            <input type="hidden" name="ratingId" value="@rating.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No ratings available.</p>
+}

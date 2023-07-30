@@ -1,0 +1,34 @@
+@model MovieRatingApp.Models.Movie
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<h1>Edit Movie</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="MovieID" />
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" class="form-control" value="@Model.Title" required>
+    </div>
+    <div class="form-group">
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" class="form-control" value="@Model.Genre" required>
+    </div>
+    <div class="form-group">
+        <label for="director">Director:</label>
+        <input type="text" id="director" name="director" class="form-control" value="@Model.Director" required>
+    </div>
+    <div class="form-group">
+        <label for="releaseDate">Release Date:</label>
+        <input type="date" id="releaseDate" name="releaseDate" class="form-control" value="@Model.ReleaseDate.ToString("yyyy-MM-dd")" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+<p>
+    <a asp-action="Details" asp-route-id="@Model.MovieID" class="btn btn-primary">Back to Details</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</p>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Movie Rating App!</h1>
+    <p class="lead">This is a simple ASP.NET Core MVC application for rating your favorite movies.</p>
+    <hr class="my-4">
+    <p>Click the button below to view the list of movies.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Movies")" role="button">View Movies</a>
+    </p>
+</div>

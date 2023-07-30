@@ -1,0 +1,53 @@
+@model IEnumerable<MovieRatingApp.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movie List";
+}
+
+<h1>Movie List</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Movie</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Movie ID</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Director</th>
+            <th>Release Date</th>
+            <th>Average Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.MovieID</td>
+                <td>@movie.Title</td>
+                <td>@movie.Genre</td>
+                <td>@movie.Director</td>
+                <td>@movie.ReleaseDate.ToShortDateString()</td>
+                <td>
+                    @if (movie.Ratings.Any())
+                    {
+                        var averageRating = movie.Ratings.Average(r => r.RatingValue);
+                        <span>@averageRating.ToString("0.00")</span>
+                    }
+                    else
+                    {
+                        <span>No ratings yet</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@movie.MovieID" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@movie.MovieID" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@movie.MovieID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
